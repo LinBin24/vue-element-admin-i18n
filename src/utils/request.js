@@ -19,7 +19,7 @@ service.interceptors.request.use(
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       config.headers['X-Token'] = getToken()
-      console.log(config)
+      // console.log(config)
     }
     return config
   },
@@ -68,10 +68,23 @@ service.interceptors.response.use(
     //   }
     //   return Promise.reject(new Error(res.message || 'Error'))
     if (res.result_code !== 20000) {
+      if (res.result_code === 0) {
+        return {
+          data: {
+            user: '1312321',
+            roles: ['admin'],
+            // roles: ['editor'],
+            name: 'test',
+            avatar: '',
+            introduction: ''
+          },
+          msg: 'test'
+        }
+      }
       Message({
         message: res.return_msg || 'Error',
         type: 'error',
-        duration: 5 * 1000
+        duration: 2 * 1000
       })
       // 101: 请先登陆 token; 50012: Other clients logged in; 50014: Token expired;
       if (res.result_code === 101) {
