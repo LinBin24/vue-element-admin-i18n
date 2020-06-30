@@ -170,7 +170,40 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  {
+    path: '/test',
+    name: 'Test',
+    component: Layout,
+    meta: { title: 'test', icon: 'zip' },
+    children: [
+      {
+        path: 'test2',
+        name: 'Test2',
+        component: () => import('@/views/test/test2/test2'),
+        meta: { title: 'test2', icon: 'zip' },
+        children: [
+          {
+            path: 'test3/test31',
+            component: () => import('@/views/test/test2/test3/test31'),
+            name: 'Test31',
+            meta: { title: 'test31', icon: 'international' }
+          },
+          {
+            path: 'test3/test32',
+            component: () => import('@/views/test/test2/test3/test32'),
+            name: 'Test32',
+            meta: { title: 'test32', icon: 'international' }
+          }
+        ]
+      },
+      {
+        path: 'test',
+        component: () => import('@/views/test/test'),
+        name: 'test',
+        meta: { title: 'test', icon: 'international' }
+      }
+    ]
+  },
   {
     path: '/icon',
     component: Layout,
@@ -179,7 +212,8 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/icons/index'),
         name: 'Icons',
-        meta: { title: 'icons', icon: 'icon', noCache: true }
+        meta: { title: 'icons', icon: 'icon', noCache: true, roles: ['admin']
+        }
       }
     ]
   },

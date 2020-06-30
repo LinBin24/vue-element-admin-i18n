@@ -1,6 +1,7 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+// import store from "@/store"
 
 const state = {
   token: getToken(),
@@ -67,6 +68,7 @@ const actions = {
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)
+
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -110,14 +112,14 @@ const actions = {
       const token = role + '-token'
 
       commit('SET_TOKEN', token)
-      setToken(token)
+      // setToken(token)
 
-      const { roles } = await dispatch('getInfo')
-
+      // const { roles } = await dispatch('getInfo')
       resetRouter()
 
       // generate accessible routes map based on roles
-      const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
+      // const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
+      const accessRoutes = await dispatch('permission/generateRoutes', [role], { root: true })
 
       // dynamically add accessible routes
       router.addRoutes(accessRoutes)
