@@ -1,6 +1,6 @@
 // import Cookies from 'js-cookie'
 
-const TokenKey = 'admin_auth'
+const TokenKey = 'Admin-Token'
 const RouterKey = 'routers'
 const UserInfo = 'user_info'
 // export const CUSTOM_URL = "http://api.mhdz.ltd"
